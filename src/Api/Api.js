@@ -31,5 +31,4 @@ const nextYear = `${currentYear + 1}-${currentMonth}-${curentDay}`;
 // Popular-project/video
 const popular_project = `games?dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
 
-const popularProjectURL = () => `${base_url}${popular_project}`;
-console.log(popularProjectURL());
+export const popularProjectURL = () => `${base_url}${popular_project}`;
