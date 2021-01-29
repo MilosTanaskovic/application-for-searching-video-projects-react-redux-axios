@@ -28,7 +28,13 @@ const curentDay = getCurrentDay();
 const currentDate = `${currentYear}-${currentMonth}-${curentDay}`;
 const lastYear = `${currentYear - 1}-${currentMonth}-${curentDay}`;
 const nextYear = `${currentYear + 1}-${currentMonth}-${curentDay}`;
-// Popular-project/video
-const popular_project = `games?dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
+// Popular-projects/videos
+const popular_projects = `games?dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
+// Upcoming-projects/videos
+const upcoming_projects = `games?dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
+// New-projects/videos
+const new_projects = `games?dates=${lastYear},${currentDate}&ordering=-release&page_size=10`;
 
-export const popularProjectURL = () => `${base_url}${popular_project}`;
+export const popularProjectsURL = () => `${base_url}${popular_projects}`;
+export const upcomingProjectsURL = () => `${base_url}${upcoming_projects}`;
+export const newProjectsURL = () => `${base_url}${new_projects}`;
