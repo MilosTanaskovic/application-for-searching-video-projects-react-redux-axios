@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { loadProjects } from './actions/projectsAction';
- 
+import React from 'react';
+import Home from './pages/Home';
 import './App.css';
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadProjects());
-  })
+  
   return (
     <div className="App">
       <h1>Projects</h1>
+      <Home />
     </div>
   );
 }
