@@ -15,9 +15,34 @@ const Home = () => {
   const {popular, newProj, upcoming} =  useSelector(state => state.projects);
  return (
   <ProjectsList>
+    {/** Upcoming Projects */}
     <h2>Upcoming Projects</h2>
     <Projects>
       {upcoming.map(project => (
+        <Project
+          name={project.name}
+          released={project.released}
+          background_image={project.background_image}
+          key={project.id}
+        />
+      ))}
+    </Projects>
+    {/** Popular Projects */}
+    <h2>Popular Projects</h2>
+    <Projects>
+      {popular.map(project => (
+        <Project
+          name={project.name}
+          released={project.released}
+          background_image={project.background_image}
+          key={project.id}
+        />
+      ))}
+    </Projects>
+    {/** New Projects */}
+    <h2>New Projects</h2>
+    <Projects>
+      {newProj.map(project => (
         <Project
           name={project.name}
           released={project.released}
