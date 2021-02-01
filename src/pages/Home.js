@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProjects } from '../actions/projectsAction';
 import Project from '../components/Project';
+import {ProjectDetail} from "../components/ProjectDetail";
 // Styled and Animation
 import Styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -15,6 +16,8 @@ const Home = () => {
   const {popular, newProj, upcoming} =  useSelector(state => state.projects);
  return (
   <ProjectsList>
+    {/** Pop-Up*/} 
+    <ProjectDetail/>
     {/** Upcoming Projects */}
     <h2>Upcoming Projects</h2>
     <Projects>
