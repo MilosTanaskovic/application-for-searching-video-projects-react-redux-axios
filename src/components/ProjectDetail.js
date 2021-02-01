@@ -12,25 +12,25 @@ export const ProjectDetail = () => {
  return (
   <CardShadow>
    <Detail>
-    <div className="stats">
-     // Rating the project 
+    <Stats>
+     {/**Rating the project */} 
      <div className="rating">
       <h3>{project.name}</h3>
       <p>Rating: {project.rating}</p>
      </div>
-     // Info Project
-     <div className="info">
+     {/**Info Project */} 
+     <Info>
       <h3>Platforms</h3>
-      <div className="platforms">
+      <Platforms>
        {project.platforms.map((data) => (
         <h3 key={data.platform.id}>{data.platform.name}</h3>
        ))}
-      </div>
-     </div>
-    </div>
-    <div className="media">
+      </Platforms>
+     </Info>
+    </Stats>
+    <Media>
         <img src={project.background_image} alt="image"/>
-    </div>
+    </Media>
     <div className="description">
         <p>{project.description_raw}</p>
     </div>
@@ -66,7 +66,7 @@ const CardShadow = Styled(motion.div)`
 const Detail = Styled(motion.div)`
  width: 80%;
  border-radius: 1rem;
- padding: 2rem 20rem;
+ padding: 2rem 5rem;
  background: white;
  position: absolute;
  left: 10%;
@@ -74,4 +74,30 @@ const Detail = Styled(motion.div)`
  img{
   width: 100%;
  }
+`;
+const Stats = Styled(motion.div)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ `;
+const Info = Styled(motion.div)`
+    text-align: center;
+`;
+const Platforms = Styled(motion.div)`
+    display: flex;
+    justify-content: space-evenly;
+    img{
+        margine-left: 3rem;
+    }
+`;
+const Media = Styled(motion.div)`
+    margine-top: 5rem;
+    img{
+        width: 100%;
+        /* height: 60vh;
+        object-fit: cover; */
+    }
+`;
+const Description = Styled(motion.div)`
+    margine: 5rem 0rem;
 `;
