@@ -38,3 +38,7 @@ const new_projects = `games?dates=${lastYear},${currentDate}&ordering=-release&p
 export const popularProjectsURL = () => `${base_url}${popular_projects}`;
 export const upcomingProjectsURL = () => `${base_url}${upcoming_projects}`;
 export const newProjectsURL = () => `${base_url}${new_projects}`;
+// Project Details
+export const projDetailsURL = (id) => `${base_url}games/${id}`;
+// Project Screenshots/img
+export const screenShotURL = (id) => `${base_url}games/${id}/screenshots`; 

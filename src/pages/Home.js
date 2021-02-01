@@ -20,6 +20,7 @@ const Home = () => {
     <Projects>
       {upcoming.map(project => (
         <Project
+          id={project.id}
           name={project.name}
           released={project.released}
           background_image={project.background_image}
@@ -32,6 +33,7 @@ const Home = () => {
     <Projects>
       {popular.map(project => (
         <Project
+          id={project.id}
           name={project.name}
           released={project.released}
           background_image={project.background_image}
@@ -44,6 +46,7 @@ const Home = () => {
     <Projects>
       {newProj.map(project => (
         <Project
+          id={project.id}
           name={project.name}
           released={project.released}
           background_image={project.background_image}

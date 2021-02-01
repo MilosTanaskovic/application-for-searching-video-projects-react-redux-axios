@@ -2,11 +2,18 @@ import React from 'react'
 // Styled and Animation
 import Styled from 'styled-components';
 import { motion } from 'framer-motion';
-
+// Redux
+import { useDispatch } from "react-redux";
+import { loadDetail } from "../actions/detailAction";
 const Project = (props) => {
- const {name, released, background_image } = props;
+ const {name, released, background_image, id } = props;
+
+ const dispatch = useDispatch();
+ const loadDetailHandler = () => {
+  dispatch(loadDetail(id));
+ }
  return (
-  <StyledProj>
+  <StyledProj onClick={loadDetailHandler}>
    <h3>{name}</h3>
    <p>{released}</p>
    <img src={background_image} alt={name}/>
