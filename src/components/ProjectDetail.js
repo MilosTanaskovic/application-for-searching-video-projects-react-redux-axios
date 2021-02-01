@@ -1,18 +1,29 @@
 import React from 'react'
 // Redux
 import { useSelector } from "react-redux";
+//React Router
+import { useHistory } from 'react-router-dom';
 // Stylong and Animation
 import Styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const ProjectDetail = () => {
-
+    const history = useHistory();
+// Exit Detail
+ const exitDetailHandler = (e) => {
+     const element = e.target;
+    if(element.classList.contains("shadow")){
+        document.body.style.overflow = 'auto';
+        history.push('/')
+    }
+ }
+// Data
  const { project, screen, isLoading } = useSelector(state => state.detail);
 
  return (
     <>
     {!isLoading && (
-    <CardShadow>
+    <CardShadow className="shadow" onClick={exitDetailHandler}>
         <Detail>
             <Stats>
             {/**Rating the project */} 
