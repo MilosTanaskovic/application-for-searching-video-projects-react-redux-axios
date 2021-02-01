@@ -1,6 +1,11 @@
 const initState = {
- project: {},
- screen: {},
+ project: { 
+   platforms: []
+ },
+ screen: {
+   results: []
+ },
+ isLoading: true,
 }
 
 const detailReducer = (state=initState, action) => {
@@ -10,7 +15,13 @@ const detailReducer = (state=initState, action) => {
     ...state,
     project: action.payload.project,
     screen: action.payload.screen,
+    isLoading: false,
    }
+  case "LOADING_DETAIL":
+    return{
+      ...state,
+      isLoading: true,
+    }
   default:
    return {...state}
  }

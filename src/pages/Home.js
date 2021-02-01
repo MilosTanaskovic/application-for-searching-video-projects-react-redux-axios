@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadProjects } from '../actions/projectsAction';
 import Project from '../components/Project';
 import {ProjectDetail} from "../components/ProjectDetail";
+// React Router
+import {useLocation} from 'react-router-dom';
 // Styled and Animation
 import Styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -13,11 +15,14 @@ const Home = () => {
   useEffect(() => {
     dispatch(loadProjects());
   }, [dispatch])
+  // get thee current location
+  const location = useLocation()
+  const pathId = location.pathname.split("/")[2];
   const {popular, newProj, upcoming} =  useSelector(state => state.projects);
  return (
   <ProjectsList>
     {/** Pop-Up*/} 
-    <ProjectDetail/>
+    {pathId && <ProjectDetail/>}
     {/** Upcoming Projects */}
     <h2>Upcoming Projects</h2>
     <Projects>

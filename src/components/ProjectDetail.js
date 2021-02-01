@@ -7,40 +7,44 @@ import { motion } from 'framer-motion';
 
 export const ProjectDetail = () => {
 
- const { project, screen } = useSelector(state => state.detail);
+ const { project, screen, isLoading } = useSelector(state => state.detail);
 
  return (
-  <CardShadow>
-   <Detail>
-    <Stats>
-     {/**Rating the project */} 
-     <div className="rating">
-      <h3>{project.name}</h3>
-      <p>Rating: {project.rating}</p>
-     </div>
-     {/**Info Project */} 
-     <Info>
-      <h3>Platforms</h3>
-      <Platforms>
-       {project.platforms.map((data) => (
-        <h3 key={data.platform.id}>{data.platform.name}</h3>
-       ))}
-      </Platforms>
-     </Info>
-    </Stats>
-    <Media>
-        <img src={project.background_image} alt="image"/>
-    </Media>
-    <div className="description">
-        <p>{project.description_raw}</p>
-    </div>
-    <div className="gallery">
-        {screen.results.map(screen => (
-         <img src={screen.image} key={screen.id} alt="game"/>
-        ))}
-    </div>
-   </Detail>
-  </CardShadow>
+    <>
+    {!isLoading && (
+    <CardShadow>
+        <Detail>
+            <Stats>
+            {/**Rating the project */} 
+            <div className="rating">
+            <h3>{project.name}</h3>
+            <p>Rating: {project.rating}</p>
+            </div>
+            {/**Info Project */} 
+            <Info>
+            <h3>Platforms</h3>
+            <Platforms>
+            {project.platforms.map((data) => (
+                <h3 key={data.platform.id}>{data.platform.name}</h3>
+            ))}
+            </Platforms>
+            </Info>
+            </Stats>
+            <Media>
+                <img src={project.background_image} alt="image"/>
+            </Media>
+            <div className="description">
+                <p>{project.description_raw}</p>
+            </div>
+            <div className="gallery">
+                {screen.results.map(screen => (
+                <img src={screen.image} key={screen.id} alt="game"/>
+                ))}
+            </div>
+        </Detail>
+    </CardShadow>
+    )} 
+    </>
  )
 }
 const CardShadow = Styled(motion.div)`
