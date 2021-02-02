@@ -8,7 +8,7 @@ import {ProjectDetail} from "../components/ProjectDetail";
 import {useLocation} from 'react-router-dom';
 // Styled and Animation
 import Styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 const Home = () => {
  const dispatch = useDispatch();
@@ -21,8 +21,11 @@ const Home = () => {
   const {popular, newProj, upcoming} =  useSelector(state => state.projects);
  return (
   <ProjectsList>
-    {/** Pop-Up*/} 
-    {pathId && <ProjectDetail/>}
+    <AnimateSharedLayout>
+    <AnimatePresence>
+      {/** Pop-Up*/} 
+       {pathId && <ProjectDetail pathId={pathId}/>}
+    </AnimatePresence>
     {/** Upcoming Projects */}
     <h2>Upcoming Projects</h2>
     <Projects>
@@ -62,6 +65,7 @@ const Home = () => {
         />
       ))}
     </Projects>
+    </AnimateSharedLayout>
   </ProjectsList>
  )
 }

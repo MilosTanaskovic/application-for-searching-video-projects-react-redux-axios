@@ -3,11 +3,13 @@ import React from 'react'
 import { useSelector } from "react-redux";
 //React Router
 import { useHistory } from 'react-router-dom';
+// Media resize - utility
+import { smallImage } from '../util';
 // Stylong and Animation
 import Styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const ProjectDetail = () => {
+export const ProjectDetail = ({pathId}) => {
     const history = useHistory();
 // Exit Detail
  const exitDetailHandler = (e) => {
@@ -24,32 +26,37 @@ export const ProjectDetail = () => {
     <>
     {!isLoading && (
     <CardShadow className="shadow" onClick={exitDetailHandler}>
-        <Detail>
+        <Detail layoutId={pathId}>
             <Stats>
             {/**Rating the project */} 
             <div className="rating">
-            <h3>{project.name}</h3>
-            <p>Rating: {project.rating}</p>
+                <motion.h3 
+                    layoutId={`title ${pathId}`}>{project.name}
+                </motion.h3>
+                <p>Rating: {project.rating}</p>
             </div>
             {/**Info Project */} 
             <Info>
-            <h3>Platforms</h3>
-            <Platforms>
-            {project.platforms.map((data) => (
-                <h3 key={data.platform.id}>{data.platform.name}</h3>
-            ))}
-            </Platforms>
+                <h3>Platforms</h3>
+                <Platforms>
+                    {project.platforms.map((data) => (
+                        <h3 key={data.platform.id}>{data.platform.name}</h3>
+                    ))}
+                </Platforms>
             </Info>
             </Stats>
             <Media>
-                <img src={project.background_image} alt="image"/>
+                <motion.img 
+                layoutId={`image ${pathId}`}
+                src={smallImage(project.background_image, 1280)} 
+                alt="image"/>
             </Media>
             <div className="description">
                 <p>{project.description_raw}</p>
             </div>
             <div className="gallery">
                 {screen.results.map(screen => (
-                <img src={screen.image} key={screen.id} alt="game"/>
+                <img src={smallImage(screen.image, 1280)} key={screen.id} alt="game"/>
                 ))}
             </div>
         </Detail>

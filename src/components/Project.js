@@ -7,21 +7,32 @@ import { useDispatch } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
 // React Router
 import { Link } from "react-router-dom";
+// Media resize - utility
+import { smallImage } from '../util';
+
 const Project = (props) => {
  const {name, released, background_image, id } = props;
 
- 
+ // convert id to string
+  const stringPathId = id.toString();
+ // Load Detail Handler 
  const dispatch = useDispatch();
  const loadDetailHandler = () => {
   document.body.style.overflow = "hidden";
   dispatch(loadDetail(id));
  }
  return (
-  <StyledProj onClick={loadDetailHandler}>
+  <StyledProj layoutId={stringPathId} onClick={loadDetailHandler}>
    <Link to={`/game/${id}`}>
-    <h3>{name}</h3>
+    <motion.h3 
+     layoutId={`title ${stringPathId}`}>   
+     {name}
+    </motion.h3>
     <p>{released}</p>
-    <img src={background_image} alt={name}/>
+    <motion.img 
+     layoutId={`image ${stringPathId}`}
+     src={smallImage(background_image, 640)} 
+     alt={name}/>
    </Link>
   </StyledProj>
  )
