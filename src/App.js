@@ -3,7 +3,6 @@ import Home from './pages/Home';
 import GlobalStyles from "./components/GlobalStyle";
 // React Router
 import { Route } from "react-router-dom";
-import './App.css';
 
 function App() {
   

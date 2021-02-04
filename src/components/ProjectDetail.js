@@ -5,6 +5,16 @@ import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 // Media resize - utility
 import { smallImage } from '../util';
+// IMAGES
+import playstation from '../img/playstation.svg';
+import steam from '../img/steam.svg';
+import xbox from '../img/xbox.svg';
+import nintendo from '../img/nintendo.svg';
+import apple from '../img/apple.svg';
+import gamepad from '../img/gamepad.svg';
+// Star Images
+import starEmpty from '../img/star-empty.png';
+import starFull from '../img/star-full.png';
 // Stylong and Animation
 import Styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -18,6 +28,37 @@ export const ProjectDetail = ({pathId}) => {
         document.body.style.overflow = 'auto';
         history.push('/')
     }
+ }
+ // Get Stars
+ const getStars = () => {
+     const stars = [];
+     const raitng = Math.floor(project.raitng);
+     for(let i = 1; i < 5; i++ ){
+         if(i <= raitng){
+             stars.push(<img alt="star" key={i} src={starFull}/>)
+         }
+         else{
+             stars.push(<img alt="star" key={i} src={starEmpty}/>)
+         }
+     }
+     return stars;
+ }
+ // Get Platform Images
+ const getPlatform = (platform) => {
+     switch (platform) {
+         case "PlayStation 4":
+            return playstation;
+        case "Xbox One":
+            return xbox;
+        case "PC":
+            return steam;
+        case "Nintendo Switch":
+            return nintendo;
+        case "IOS":
+            return apple;
+         default:
+             return gamepad;
+     }
  }
 // Data
  const { project, screen, isLoading } = useSelector(state => state.detail);
@@ -34,13 +75,18 @@ export const ProjectDetail = ({pathId}) => {
                     layoutId={`title ${pathId}`}>{project.name}
                 </motion.h3>
                 <p>Rating: {project.rating}</p>
+                {getStars()}
             </div>
             {/**Info Project */} 
             <Info>
                 <h3>Platforms</h3>
                 <Platforms>
                     {project.platforms.map((data) => (
-                        <h3 key={data.platform.id}>{data.platform.name}</h3>
+                        <img 
+                        key={data.platform.id} 
+                        src={getPlatform(data.platform.name)} 
+                        alt={data.platform.name} ></img>
+                       
                     ))}
                 </Platforms>
             </Info>
@@ -51,9 +97,9 @@ export const ProjectDetail = ({pathId}) => {
                 src={smallImage(project.background_image, 1280)} 
                 alt="image"/>
             </Media>
-            <div className="description">
+            <Description>
                 <p>{project.description_raw}</p>
-            </div>
+            </Description>
             <div className="gallery">
                 {screen.results.map(screen => (
                 <img src={smallImage(screen.image, 1280)} key={screen.id} alt="game"/>
@@ -64,7 +110,7 @@ export const ProjectDetail = ({pathId}) => {
     )} 
     </>
  )
-}
+};
 const CardShadow = Styled(motion.div)`
  width: 100%;
  min-height: 100vh;
@@ -73,6 +119,7 @@ const CardShadow = Styled(motion.div)`
  position: fixed;
  top: 0;
  left: 0;
+ z-index: 5;
  &::-webkit-scrollbar {
   width: 0.5rem;
  }
@@ -93,6 +140,7 @@ const Detail = Styled(motion.div)`
  position: absolute;
  left: 10%;
  color: black;
+ z-index: 10;
  img{
   width: 100%;
  }
@@ -101,6 +149,11 @@ const Stats = Styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    img{
+        width: 2rem;
+        height: 2rem;
+        display: inline;
+    }
  `;
 const Info = Styled(motion.div)`
     text-align: center;
@@ -116,8 +169,6 @@ const Media = Styled(motion.div)`
     margine-top: 5rem;
     img{
         width: 100%;
-        /* height: 60vh;
-        object-fit: cover; */
     }
 `;
 const Description = Styled(motion.div)`
