@@ -30,7 +30,7 @@ const Nav = () => {
  }
  return (
   <StyledNav>
-   <Logo onClick={clearSearched}/>
+   <Logo clearSearched={clearSearched}/>
    <form className="search">
     <input value={textInput} onChange={inputHandler} type="text" name="" id=""/>
     <button onClick={submitSearch} type="submit">Search</button>
