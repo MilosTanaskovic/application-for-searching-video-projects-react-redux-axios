@@ -18,7 +18,7 @@ const Home = () => {
   // get thee current location
   const location = useLocation()
   const pathId = location.pathname.split("/")[2];
-  const {popular, newProj, upcoming} =  useSelector(state => state.projects);
+  const {popular, newProj, upcoming, searched} =  useSelector(state => state.projects);
  return (
   <ProjectsList>
     <AnimateSharedLayout>
@@ -26,6 +26,23 @@ const Home = () => {
       {/** Pop-Up*/} 
        {pathId && <ProjectDetail pathId={pathId}/>}
     </AnimatePresence>
+    {/** Searched */}
+    { searched.length ? (
+      <div className="searched">
+      <h2>Searched Projects</h2>
+      <Projects>
+        {searched.map(project => (
+          <Project
+            id={project.id}
+            name={project.name}
+            released={project.released}
+            background_image={project.background_image}
+            key={project.id}
+          />
+        ))}
+      </Projects>
+    </div>
+    ): ''}
     {/** Upcoming Projects */}
     <h2>Upcoming Projects</h2>
     <Projects>

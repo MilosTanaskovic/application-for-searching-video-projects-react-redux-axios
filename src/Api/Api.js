@@ -42,3 +42,5 @@ export const newProjectsURL = () => `${base_url}${new_projects}`;
 export const projDetailsURL = (id) => `${base_url}games/${id}`;
 // Project Screenshots/img
 export const screenShotURL = (id) => `${base_url}games/${id}/screenshots`; 
+// Searched project
+export const searchGameURL = (proj_name) => `${base_url}games?search=${proj_name}$page_size=9`;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { popularProjectsURL, upcomingProjectsURL ,newProjectsURL} from '../Api/Api';
+import { popularProjectsURL, upcomingProjectsURL ,newProjectsURL, searchGameURL } from '../Api/Api';
 
 // Action Creator
 export const loadProjects = () => async (dispatch) => {
@@ -14,5 +14,17 @@ export const loadProjects = () => async (dispatch) => {
    upcoming: upcomingData.data.results,
    newProj: newData.data.results,
   }
- })
-}
+ });
+};
+// Search
+export const fetchSearch = (proj_name) => async (dispatch) => {
+ //FETCH AXIOS
+ const searchGames = await axios.get(searchGameURL(proj_name));
+
+ dispatch({
+  type: "FETCH_SEARCHED",
+  payload: {
+   searched: searchGames.data.results,
+  }
+ });
+};

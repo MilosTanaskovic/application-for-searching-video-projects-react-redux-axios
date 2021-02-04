@@ -1,19 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 //Components
 import Logo from "./Logo";
 // Styling 
 import Styled from "styled-components";
 import {motion} from 'framer-motion';
+// Redux and Routes
+import { fetchSearch } from "../../actions/projectsAction";
+import { useDispatch } from 'react-redux';
 
 const Nav = () => {
- 
+ const dispatch = useDispatch();
+ const [textInput, setTextInput] = useState('');
+
+ // input Handler
+ const inputHandler = (e) => {
+  setTextInput(e.target.value);
+ };
+ // submit Search
+ const submitSearch = (e) => {
+  e.preventDefault();
+  dispatch(fetchSearch(textInput));
+  setTextInput("");
+ };
+ // Clear Searched
+ const clearSearched = () => {
+  dispatch({
+   type: "CLEAR_SEARCHED"
+  });
+ }
  return (
   <StyledNav>
-   <Logo />
-   <div className="search">
-    <input type="text" name="" id=""/>
-    <button>Search</button>
-   </div>
+   <Logo onClick={clearSearched}/>
+   <form className="search">
+    <input value={textInput} onChange={inputHandler} type="text" name="" id=""/>
+    <button onClick={submitSearch} type="submit">Search</button>
+   </form>
   </StyledNav>
  )
 }
