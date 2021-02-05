@@ -9,6 +9,7 @@ import {useLocation} from 'react-router-dom';
 // Styled and Animation
 import Styled from 'styled-components';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { fadeIn } from "../animations";
 
 const Home = () => {
  const dispatch = useDispatch();
@@ -20,7 +21,11 @@ const Home = () => {
   const pathId = location.pathname.split("/")[2];
   const {popular, newProj, upcoming, searched} =  useSelector(state => state.projects);
  return (
-  <ProjectsList>
+  <ProjectsList 
+    variants={fadeIn} 
+    initial="hidden"
+    animate="show"
+  >
     <AnimateSharedLayout>
     <AnimatePresence>
       {/** Pop-Up*/} 
@@ -88,7 +93,7 @@ const Home = () => {
 }
 
 const ProjectsList = Styled(motion.div)`
-  padding: 0rem 5rem;
+  padding: 0rem 2rem;
   h2{
     padding: 5rem 0rem;
   }
