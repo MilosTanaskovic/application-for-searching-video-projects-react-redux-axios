@@ -16,10 +16,12 @@ const Nav = ({clearSearched}) => {
      setShow(false);
    }
  }
+ // useEffect
  useEffect(() => {
   window.addEventListener("scroll", transitionNavBar);
   return () => window.removeEventListener("scroll", transitionNavBar);
  }, []);
+
  return (
   <div className={`nav ${show && "nav__black"}`}>
     <StyledLogo onClick={clearSearched}>

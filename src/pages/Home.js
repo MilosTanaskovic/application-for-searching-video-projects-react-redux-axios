@@ -94,6 +94,7 @@ const Home = () => {
 
 const ProjectsList = Styled(motion.div)`
   padding: 0rem 2rem;
+  background-color: #2e2e38;
   h2{
     padding: 5rem 0rem;
   }
