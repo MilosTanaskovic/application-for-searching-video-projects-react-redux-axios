@@ -10,6 +10,10 @@ import { fadeIn } from "../../animations";
 // Styling and animation
 import { motion } from 'framer-motion';
 import Styled from 'styled-components';
+// FontAwsome Icons (prop drilling example)
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
  const dispatch = useDispatch();
@@ -33,14 +37,18 @@ const Header = () => {
     }}
   >
    {/** Nav - Logo */}
-   <Nav clearSearched={clearSearched}/>
+   <Nav />
    
    {/** Video */}
    
    {/** Header Content */}
    <Content />
    {/** Search Input */}
-   <Search />
+   <Search 
+    faSearch={faSearch}
+    FontAwesomeIcon={FontAwesomeIcon}  
+    clearSearched={clearSearched}
+    />
   </StyledHeader>
  )
 }
