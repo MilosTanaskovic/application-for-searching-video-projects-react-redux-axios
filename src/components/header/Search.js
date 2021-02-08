@@ -56,6 +56,7 @@ const StyledNav = Styled(motion.div)`
   padding: 0.5rem;
   border: 2px solid #363A42;
   margin-top: 1rem;
+  color: white;
   background-color: #202123;
   box-shadow: 0px 0px 30px rgba(0,0,0,0.2);
   ::placeholder{
@@ -69,6 +70,9 @@ const StyledNav = Styled(motion.div)`
    padding-left: 20px;
    margin-bottom: 20px;
    color: #EFF3F5;
+  }
+  ::value{
+    color: white;
   }
  }
  button {

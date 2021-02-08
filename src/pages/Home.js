@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProjects } from '../actions/projectsAction';
-import Project from '../components/Project';
-import {ProjectDetail} from "../components/ProjectDetail";
+import Project from '../components/mainPage/Project';
+import {ProjectDetail} from "../components/mainPage/ProjectDetail";
 // React Router
 import {useLocation} from 'react-router-dom';
 // Styled and Animation
@@ -20,6 +20,11 @@ const Home = () => {
   const location = useLocation()
   const pathId = location.pathname.split("/")[2];
   const {popular, newProj, upcoming, searched} =  useSelector(state => state.projects);
+  // Count all projs
+  let projs = (popular.length + newProj.length + upcoming.length);
+  let allProjss = (projs + searched.length);
+
+
  return (
   <ProjectsList 
     variants={fadeIn} 
@@ -31,6 +36,10 @@ const Home = () => {
       {/** Pop-Up*/} 
        {pathId && <ProjectDetail pathId={pathId}/>}
     </AnimatePresence>
+    {/** All Projects */}
+    <AllProjs>
+      <p>All Projs - {searched ? allProjss : projs } results</p>
+    </AllProjs>
     {/** Searched */}
     { searched.length ? (
       <div className="searched">
@@ -42,6 +51,8 @@ const Home = () => {
             name={project.name}
             released={project.released}
             background_image={project.background_image}
+            video_count={project.ratings_count}
+            slug={project.slug}
             key={project.id}
           />
         ))}
@@ -57,6 +68,8 @@ const Home = () => {
           name={project.name}
           released={project.released}
           background_image={project.background_image}
+          video_count={project.ratings_count}
+          slug={project.slug}
           key={project.id}
         />
       ))}
@@ -70,6 +83,8 @@ const Home = () => {
           name={project.name}
           released={project.released}
           background_image={project.background_image}
+          video_count={project.ratings_count}
+          slug={project.slug}
           key={project.id}
         />
       ))}
@@ -83,6 +98,8 @@ const Home = () => {
           name={project.name}
           released={project.released}
           background_image={project.background_image}
+          video_count={project.ratings_count}
+          slug={project.slug}
           key={project.id}
         />
       ))}
@@ -99,10 +116,23 @@ const ProjectsList = Styled(motion.div)`
     padding: 5rem 0rem;
   }
 `;
+const AllProjs = Styled(motion.div)`
+  padding: 40px 0px;
+  opacity: 0.35;
+  border-bottom: 3px solid #8D8D8E;
+  p{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    color: #B0B3B5;
+  }
+`;
 const Projects = Styled(motion.div)`
   min-height: 80vh;
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+  grid-template-columns: repeat( auto-fit, minmax(350px, 1fr) );
   grid-column-gap: 3rem;
   grid-row-gap: 5rem;
 `;

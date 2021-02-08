@@ -2,7 +2,7 @@ import React from 'react'
 // Styling and Animation
 import {motion} from 'framer-motion';
 import Styled from "styled-components";
-
+import breakpoint from '../breakpoints';
 const Content = () => {
  return (
   <StyledContent>
@@ -17,5 +17,8 @@ const StyledContent = Styled(motion.div)`
   text-align: center;
   color: white;
  }
+ @media only screen and ${breakpoint.device.xsm}{
+        padding: 7rem 0rem 3rem 0rem;
+    }
 `;
 export default Content

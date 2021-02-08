@@ -2,18 +2,21 @@ import React from 'react'
 // Styled and Animation
 import Styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { popUp } from "../animations";
+import { popUp } from "../../animations";
+// FontAwsome Icons (prop drilling example)
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faVideo, faClock, faSignature } from '@fortawesome/free-solid-svg-icons';
 // Redux
 import { useDispatch } from "react-redux";
-import { loadDetail } from "../actions/detailAction";
+import { loadDetail } from "../../actions/detailAction";
 // React Router
 import { Link } from "react-router-dom";
 // Media resize - utility
-import { smallImage } from '../util';
+import { smallImage } from '../../util';
 
 const Project = (props) => {
- const {name, released, background_image, id } = props;
-
+ const {name, released, background_image, video_count, slug, id } = props;
  // convert id to string
   const stringPathId = id.toString();
  // Load Detail Handler 
@@ -37,8 +40,8 @@ const Project = (props) => {
       layoutId={`image ${stringPathId}`}
       src={smallImage(background_image, 640)} 
       alt={name}/>
-      <p>Name of Location</p>
-      <p>Location</p>
+      <p>{name}</p>
+      <p><FontAwesomeIcon icon={faSignature} size="lg" color="#B0B3B5" /> {slug}</p>
     </StyledTitleProj>
     {/** Description */}
     <StyledDescProj>
@@ -55,8 +58,8 @@ const Project = (props) => {
     </StyledProductProj>
     {/** Info - Nu of proj, Date */}
     <StyledInfoProj>
-      <p>5 Videos</p>
-      <p>{released}</p>
+      <p><FontAwesomeIcon icon={faVideo} color="#B0B3B5" size="lg" /> {video_count} Videos</p>
+      <p><FontAwesomeIcon icon={faClock} color="#B0B3B5" size="lg" /> {released}</p>
     </StyledInfoProj>
    </Link>
   </StyledProj>
@@ -86,21 +89,25 @@ const StyledTitleProj = Styled(motion.div)`
   grid-template-columns: 60px 240px;
   grid-template-rows: 30px 30px;
   grid-auto-flow: column;
+  margin:10px;
   img{
-  width: 10vh;
-  height: 10vh;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3px;
+  box-shadow: 4px 4px rgba(20,21,23);
   object-fit: cover;
   grid-column: 1;
   grid-row: 1 / 3;
  }
  p {
-  /* font-style: normal;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 25px; */
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1.5px;
   text-align: left;
   color: #B0B3B5;
-; 
  }
 `;
 const StyledDescProj = Styled(motion.div)`
@@ -108,6 +115,8 @@ const StyledDescProj = Styled(motion.div)`
   font-weight: 600;
   font-size: 20px;
   line-height: 25px;
+  margin:10px;
+  text-align: left;
 `;
 const StyledProductProj = Styled(motion.div)`
   display: flex;
@@ -127,6 +136,7 @@ const StyledProductProj = Styled(motion.div)`
 const StyledInfoProj = Styled(motion.div)`
   display: flex;
   justify-content: space-between;
+  margin:10px;
   p {
     font-style: normal;
     padding: 15px 0px 10px 0px;
